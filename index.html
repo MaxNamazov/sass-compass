@@ -44,6 +44,9 @@
 					<p>
 						<small>Follow this presentation <a href="http://erinwilbur.com/sass-compass">erinwilbur.com/sass-compass</a></small>
 					</p>
+					<p>
+						<small>Githubs: <a href="https://github.com/likedaang/sass-compass">github.com/likedaang/sass-compass</a></small>
+					</p>
 				</section>
 
 				<section data-background-transition="slide" data-transition="linear">
@@ -56,10 +59,6 @@
 						<p>New</p>
 						<img src="lib/img/sass-logo-new.png" alt="new sass logo" width="300px">
 					</div>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
 				</section>
 
 				<section>
@@ -84,15 +83,15 @@
 						<p>Sass keeps you <b>organzied</b> and gets you up and running quickly with <a href="http://compass-style.org" target="_blank">the Compass style library</a>.</p>
 					</section>
 				</section>
-				<section id="4">
+				<section>
 
 					<h2>Types of syntax:</h2>
 						<h3 style="color:#c6538c">.scss</h4>
 						<hr>
 							<ul>
-								<li>Sassy CSS</li>
-								<li>more widely used</li>
-								<li>An extension of the syntax of CSS3</li>
+								<li class="fragment">Sassy CSS</li>
+								<li class="fragment">more widely used</li>
+								<li class="fragment">An extension of the syntax of CSS3</li>
 							</ul> 
 				</section>
 
@@ -100,10 +99,10 @@
 					<h3 style="color:#c6538c;">.sass</h4>
 					<hr>
 					<ul>
-						<li>Indented syntax</li>
-						<li>the older of the two</li>
-						<li>Uses intendation rather than brackets to indicate nesting</li>
-						<li>Newlines rather than semicolones to separate properties</li>
+						<li class="fragment">Indented syntax</li>
+						<li class="fragment">the older of the two</li>
+						<li class="fragment">Uses intendation rather than brackets to indicate nesting</li>
+						<li class="fragment">Newlines rather than semicolons to separate properties</li>
 					</ul>
 				</section>
 
@@ -182,6 +181,11 @@
 						<li class="fragment">as a standalone Ruby module</li>
 						<li class="fragment">as a plugin for any Rack-enabled framework</li>
 					</ol>
+					<hr class="fragment">
+
+					<p class="fragment">
+						<small>If you are feeling adventurous check out tools for managing multiple ruby environments: <a href="https://rvm.io/">rvm</a> &amp; <a href="https://github.com/sstephenson/rbenv">rbenv</a></small>
+					</p>
 				</section>
 
 				<section data-markdown data-background-transition="slide" data-transition="linear">
@@ -227,8 +231,8 @@
 					<p><a href="http://compass-style.org/" target="_blank">compass-style.org</a></p>
 					<img src="lib/img/compass-logo.png" alt="compass logo">
 					<ul>
-						<li>Compass is an open-source Sass Framework consisting of a collection of helpful tools and Sass library that produces battle-tested cross-browser CSS</li>
-						<li>It was created by <a href="https://github.com/chriseppstein/compass" target="_blank">Chris Epstein</a></li>
+						<li class="fragment">Compass is an open-source Sass Framework consisting of a collection of helpful tools and Sass library that produces battle-tested cross-browser CSS</li>
+						<li class="fragment">It was created by <a href="https://github.com/chriseppstein/compass" target="_blank">Chris Epstein</a></li>
 					</ul>
 					
 				</section>
@@ -814,30 +818,91 @@ $module-margin: 40px 0 20px 100px;
 					<p class="mini">*Make sure your @include mixin comes before the @include</p>
 				</section>
 
-				<section>
-					<h3>Adding Arguments to Mixins</h3>
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>Mixin cont.</h3>
+					<p class="sassy-pink">So we have our normal mixin and use it for <code>h1</code> tags.</p>
+							<pre><code contenteditable>
+@mixin large-text {
+  font: {
+    family: Arial;
+    size: 20px;
+    weight: bold;
+  }
+  color: #ff0000;
+}
+
+h1 {
+	@include large-text;
+	margin-bottom: 0.5em;
+}
+							</code></pre>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+
+					<h3>Mixins in Mixins</h3>
+					<p>Let's say you have a need to separate out typography and design elements - at times you need both:</p>
+						<pre><code contenteditable>
+@mixin compound {
+  @include highlighted-background;
+  @include header-text;
+}
+
+@mixin highlighted-background { 
+	background-color: #fc0;
+	padding: 0.5em;
+}
+@mixin header-text { font-size: 20px; }
+
+.main-content{
+	@include highlighted-background;
+	h1 {
+		@include header-text;
+	}
+}
+
+.sub-footer h1 {
+	@include compound;
+}
+						</code></pre>
+						<aside class="notes">
+							Remember mixin recursion is forbidden: you may not include mixins within itself directly or indirectly
+						</aside>
+					
+				</section>
+
+
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>Adding Default Arguments to Mixins</h3>
 					<br/>
 					<div class="clear">
 						<div class="left-half">
 							<p class="mini align-left sassy-pink">SCSS</p>
 							<pre><code contenteditable>
-@mixin button($radius, $color: #000) {
-	border-radius: $radius;
-	color: $color;
+@mixin wacky-border($color, $width: 1in) {
+  border: {
+    color: $color;
+    width: $width;
+    style: dashed;
+  }
 }
-
-.btn-a {
-	@include button($color: #777777, $radius: 5px);
-}
+p { @include wacky-border(blue); }
+h1 { @include wacky-border(blue, 2in); }
 							</code></pre>
 						</div>
 						<div class="right-half">
 							<p class="mini align-left sassy-pink">CSS</p>
 							<pre><code contenteditable>
-.btn-a {
-	border-radius: 5px;
-	color: #777777;
-}
+p {
+  border-color: blue;
+  border-width: 1in;
+  border-style: dashed; }
+
+h1 {
+  border-color: blue;
+  border-width: 2in;
+  border-style: dashed; }
 							</code></pre>		
 
 						</div>
@@ -846,7 +911,165 @@ $module-margin: 40px 0 20px 100px;
 				</section>
 
 				<section data-background-transition="slide" data-transition="linear">
-					<h3>Interpolation in Mixins</h3>
+					<h2>Content Blocks in Mixins</h2>
+					<p class="mini">It is possible to pass a block of styles to the mixin for placement within the styles included by the mixin. The styles will appear at the location of any <code>@content</code> directives found within the mixin. This makes is possible to define abstractions relating to the construction of selectors and directives.</p>
+					<br/>
+					<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+@mixin apply-to-ie6-only {
+  * html {
+    @content;
+  }
+}
+@include apply-to-ie6-only {
+  #logo {
+    background-image: url(/logo.gif);
+  }
+}
+							</code></pre>
+
+					<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+* html #logo {
+  background-image: url(/logo.gif);
+}
+							</code></pre>
+				</section>
+
+
+				<section data-background-transition="slide" data-transition="linear">
+				<h3>Content Blocks for Media Queries</h3>
+				<p class="sassy-pink">Method 1:</p>
+							<pre><code contenteditable>
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: 479px) { @content; }
+  }
+  @else if $media == wide-handhelds {
+    @media only screen and (min-width: 480px) and (max-width: 767px) { @content; }
+  }
+  @else if $media == tablets {
+    @media only screen and (min-width: 768px) and (max-width: 959px) { @content; }
+  }
+}
+ 
+#sidebar {
+  float: left;
+  width: 300px;
+  @include respond-to(handhelds) { float: none; }
+  @include respond-to(wide-handhelds) { float: none; }
+  @include respond-to(tablets) { width: 240px; }
+}
+							</code></pre>
+
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<p>Compiles out:</p>
+							<pre><code contenteditable>
+#sidebar {
+  float: left;
+  width: 300px; 
+}
+@media only screen and (max-width: 479px) {
+#sidebar {
+  float: none; } 
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+#sidebar {
+  float: none; }
+}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+#sidebar {
+  width: 240px; } 
+}
+
+  // and for every instance inside a selector
+
+#content {
+width: 960px; 
+}
+@media only screen and (max-width: 479px) {
+  #content {
+    width: 200px; } 
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  #content {
+    width: 300px; } 
+}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  #content {
+    width: 600px; } 
+}
+
+							</code></pre>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+				<p class="sassy-pink">Method 2:</p>
+							<pre><code contenteditable>
+@mixin bp($point) {
+  @if $point == papa-bear {
+    @media (max-width: 1600px) { @content; }
+  }
+  @else if $point == mama-bear {
+    @media (max-width: 1250px) { @content; }
+  }
+  @else if $point == baby-bear {
+    @media (max-width: 600px)  { @content; }
+  }
+}
+
+@include bp(baby-bear) {
+  #sidebar {
+    width:100%;
+  }
+}
+
+@include bp(medium) {
+  #sidebar {
+    width:50%;
+  }
+
+  #content {width: 70%;}
+}
+							</code></pre>
+
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<p>Compiles out:</p>
+							<pre><code contenteditable>
+@media (max-width: 480px) {
+  #sidebar {
+    width: 100%; 
+  } 
+}
+
+@media (min-width: 800px) and (max-width: 1000px) {
+  #sidebar {
+    width: 50%; 
+   }
+
+  #content {
+    width: 70%; 
+  } 
+}
+
+
+							</code></pre>
+				</section>			
+
+				<section>
+					<p>Mind sufficiently melted? Check out more:</p>
+					<ul>
+						<li><a href="http://css-tricks.com/conditional-media-query-mixins/">CSS-Tricks</a></li>
+						<li><a href="http://mikefowler.me/2011/12/08/passing-content-to-mixins-in-sass/">Passing Content to Mixins</a></li>
+					</ul>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>#{} Interpolation in Mixins</h3>
 					<br/>
 					<div class="clear">
 						<div class="left-half">
@@ -1247,6 +1470,42 @@ stylesheets/
 						<li><a href="http://compass-style.org/reference/compass/typography/vertical_rhythm/" target="_blank">Vertical Rhythm</a> with Compass</li>
 					</ul>
 					<img src="lib/img/vertical-rhythm.png" alt="vertical rhythm">
+				</section>
+
+				<section>
+					<img src="lib/img/grumpy-cat-non.jpg" alt="grumpy cat non" width="400px">
+					<p>But I am a designer! This is all very complicate</p>
+				</section>
+
+				<section>
+					<h2>It will make your life easier</h2>
+					<p class="sassy-pink"><b>Fully grasp organizing your CSS first:</b></p>
+					<br/>
+					<ul>
+						<li><a href="http://coding.smashingmagazine.com/2011/12/12/an-introduction-to-object-oriented-css-oocss/" target="_blank">OOCSS</a> ( Object Oriented CSS )</li>
+						<li>Scale and Maintain Legacy CSS with Sass and <a href="http://webuild.envato.com/blog/how-to-scale-and-maintain-legacy-css-with-sass-and-smacss/" target="_blank">SMACSS</a></li>
+						<li>Know this: <a href="http://bem.info/method/" target="_blank">BEM</a> ( Block — Element — Modifier )</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Changes will be required</h2>
+					<p class="sassy-pink">Make them less painful</p>
+					<ul>
+						<li class="fragment">Think separation into self-contained modules</li>
+						<li class="fragment">Treat every component as if it was reusable</li>
+						<li class="fragment">Essentially, be mindful of naming convention inside a file organization strategy that makes sense</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>The Goal</h2>
+					<p class="sassy-pink">Any time you update a code block or change the 'experience':</p>
+					<ul>
+						<li class="fragment">Want the experience to be the same everywhere on the site or in the app</li>
+						<li class="fragment">Don't want it to conflict within the different areas it lives</li>
+						<li class="fragment">Don't want to RE-DESIGN every single time</li>
+					</ul>
 				</section>
 
 
