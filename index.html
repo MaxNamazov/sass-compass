@@ -1,0 +1,1309 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sass &amp; Compass Funtown</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background-color="#c6538c" id="title">
+					<h1 style="text-transform:none;">Sass</h1>
+					<hr style="border-color:#eaeaea;">
+					<h3>Syntactically Awesome Style Sheets</h3>
+					<hr style="border-color:#eaeaea;">
+					<p>
+						<small>Follow this presentation <a href="http://erinwilbur.com/sass-compass">erinwilbur.com/sass-compass</a></small>
+					</p>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>New Logo!</h2>
+					<div class="left-half">
+						<p>Old</p>
+						<img src="lib/img/sass.jpg" alt="old sass logo" width="300px">
+					</div>
+					<div class="right-half">
+						<p>New</p>
+						<img src="lib/img/sass-logo-new.png" alt="new sass logo" width="300px">
+					</div>
+
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>What is Sass?</h2>
+						<ul>
+							<li class="fragment">
+								<a href="http://sass-lang.com">Sass</a> is a preprocessor that you write in a slightly more modified CSS-like syntax that is processed into plain CSS either in your development environment or as part of your deployment process
+							</li>
+							<li class="fragment">
+								Created by <a href="http://en.wikipedia.org/wiki/Hampton_Catlin">Hampton Catlin</a> (also responsible for creating HAML) &amp; primary developers: Nathan Weizenbaum & Chris Epstein
+							</li>
+							<li class="fragment">
+								Baked into Rails
+							</li>
+						</ul>
+					</section>
+
+					<section data-background-transition="slide" data-transition="linear">
+						<h4>(from sass-lang.com)</h4>
+						<p>It allows you to use <a href="#variables_">variables</a>, <a href="#nested_rules">nested rules</a>, <a href="#mixins">mixins</a>, <a href="#import">inline imports</a>, and more, all with a fully CSS-compatible syntax. </p>
+						<p>Sass keeps you <b>organzied</b> and gets you up and running quickly with <a href="http://compass-style.org" target="_blank">the Compass style library</a>.</p>
+					</section>
+				</section>
+				<section id="4">
+
+					<h2>Types of syntax:</h2>
+						<h3 style="color:#c6538c">.scss</h4>
+						<hr>
+							<ul>
+								<li>Sassy CSS</li>
+								<li>more widely used</li>
+								<li>An extension of the syntax of CSS3</li>
+							</ul> 
+				</section>
+
+				<section>
+					<h3 style="color:#c6538c;">.sass</h4>
+					<hr>
+					<ul>
+						<li>Indented syntax</li>
+						<li>the older of the two</li>
+						<li>Uses intendation rather than brackets to indicate nesting</li>
+						<li>Newlines rather than semicolones to separate properties</li>
+					</ul>
+				</section>
+
+				<section data-markdown data-background-transition="slide" data-transition="linear">
+					<script type="text/template">
+						## SCSS Syntax
+
+						Still looks like CSS3 - more typing
+
+						```
+						// .scss
+						table.hl {
+						  margin: 2em 0;
+						  td.ln {
+						    text-align: right;
+						  }
+						}
+
+						li {
+						  font: {
+						    family: serif;
+						    weight: bold;
+						    size: 1.2em;
+						  }
+						}
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Sass Syntax
+
+						less typing - more getting used to
+
+						```
+						// Sass
+						table.hl
+						  margin: 2em 0
+						  td.ln
+						    text-align: right
+
+						li
+						  font:
+						    family: serif
+						    weight: bold
+						    size: 1.2em
+						```
+					</script>
+				</section>
+
+
+				<section data-markdown data-background-transition="slide" data-transition="linear">
+					<script type="text/template">
+					## Convert Syntax
+
+					Either syntax can import files written in the other. Files can be automatically converted from one syntax to the other using the sass-convert command line tool:
+
+					```
+					# Convert Sass to SCSS
+					$ sass-convert style.sass style.scss
+
+					# Convert SCSS to Sass
+					$ sass-convert style.scss style.sass
+
+					```
+					</script>
+
+				</section>
+
+				<section>
+					<h2>Install Sass</h2>
+					<p class="sassy-pink">Sass can be used in three ways:</p>
+					<ol>
+						<li class="fragment">as a command-line tool</li>
+						<li class="fragment">as a standalone Ruby module</li>
+						<li class="fragment">as a plugin for any Rack-enabled framework</li>
+					</ol>
+				</section>
+
+				<section data-markdown data-background-transition="slide" data-transition="linear">
+					<script type="text/template">
+						## Install Sass gem:
+						```
+						gem install sass
+
+						```
+						or
+						```
+						sudo gem install sass
+						```
+						(windows : may need to install Ruby first)
+						
+					</script>
+				</section>
+
+				<section data-state="customevent">
+					<p>
+						To run Sass from the command line, just use:
+					</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+						sass input.scss output.css
+
+					</code></pre>
+					</br>
+					<p>You can also tell Sass to watch the file and update the CSS every time the Sass file changes:</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+						sass --watch input.scss:output.css
+					</code></pre>					
+					</br>
+					<p>If you have a directory with many Sass files, you can also tell Sass to watch the entire directory:</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+					sass --watch app/sass:public/stylesheets
+					</code></pre>
+					</br>
+					<p>Use sass <code>--help</code> for full documentation</p>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>Compass!</h2>
+					<p><a href="http://compass-style.org/" target="_blank">compass-style.org</a></p>
+					<img src="lib/img/compass-logo.png" alt="compass logo">
+					<ul>
+						<li>Compass is an open-source Sass Framework consisting of a collection of helpful tools and Sass library that produces battle-tested cross-browser CSS</li>
+						<li>It was created by <a href="https://github.com/chriseppstein/compass" target="_blank">Chris Epstein</a></li>
+					</ul>
+					
+				</section>
+
+				<section data-state="customevent">
+					<h2>Installing Compass</h2>
+					<p>Compass runs on any computer that has ruby installed.</p>
+					</br>
+					<h4>Setting up the ruby environment</h4>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+						gem update --system</code></pre>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+						gem install compass
+					</code></pre>
+					<p>For terminal newbies <a href="http://wiseheartdesign.com/articles/2010/11/12/the-designers-guide-to-the-osx-command-prompt/" target="_blank">have a look a this</a>.</p>
+				</section>
+
+				<section data-markdown data-background-transition="slide" data-transition="linear">
+				<p class="sassy-pink">Create your compass project:</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+						compass create sass-demo
+					</code></pre>
+				<p>creates:</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+						directory sass-demo/ 
+						directory sass-demo/sass/ 
+						directory sass-demo/stylesheets/ 
+						create sass-demo/config.rb 
+						create sass-demo/sass/screen.scss 
+						create sass-demo/sass/print.scss 
+						create sass-demo/sass/ie.scss 
+						create sass-demo/stylesheets/ie.css 
+						create sass-demo/stylesheets/print.css 
+						create sass-demo/stylesheets/screen.css 
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Almost there!</h2>
+					<p>You must compile your sass stylesheets into CSS when they change.
+						This can be done in one of the following ways:
+						</br>
+						</br>
+						<ol>
+							<li>To compile on demand:</br>
+								<code class="sassy-pink">compass compile [path/to/project]</code>
+							</li>
+							<li>To monitor your project for changes and automatically recompile:</br>
+							<code class="sassy-pink">compass watch [path/to/project]</code>
+							</li>
+						</ol>
+						<p class="tiny"><em>(Also remember to import your newly compiled css files in your html doc)</em></p>
+					</p>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>However,</h2>
+					<img src="lib/img/terminal.png" alt="terminal window">
+					<p>If this sort of thing frightens you...</p>
+				</section>
+
+				<section>
+					<h3>Other options for installing compass</h3>
+						<img src="lib/img/create-project.png" alt="compass app">
+						<p><a href="http://compass.handlino.com/" target="_blank">Compass.app</a> from <a href="http://handlino.com/">Handlino</a>.</p>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<img src="lib/img/scout-app.jpg" alt="scout app">
+					<p><a href="http://mhs.github.com/scout-app/" target="_blank">Scout</a> from <a href="http://mutuallyhuman.com/" target="_blank">Mutually Human</a>.</p>
+				</section>
+
+				<section>
+					<div class="clear">
+					<h3>Ready to write some Sass</h3>					
+					<p class="sassy-pink"><b>Nesting</b></p>
+					<br/>
+					</div>
+					<div class="clear">
+						<div class="left-half">
+						<p class="align-left">SCSS</p>
+<pre><code contenteditable data-trim>
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+</code></pre>
+					</div>
+					<div class="right-half">
+					<p class="align-left">CSS</p>
+<pre><code contenteditable>
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+</code></pre>
+					</div>
+				</div>
+				</section>
+
+
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>This is Neat</h2>
+					<p>Everyone is happy!</p>
+					<img src="lib/img/happy-dogs.jpg" alt="happy dogs" width="500px;">
+				</section>
+
+				<section>
+						<h2>But hold up</h2>
+
+						<p>Proceed with caution - before you know it you could have yourself a <b class="sassy-pink">CSS Selector Nightmare</b></p>
+
+						<br/>
+						<p>Suppose someone gives you this lovely bit of HTML:</p>
+<pre><code contenteditable><body>
+  <div class="container">
+    <div class="content">
+      <div class="articles">
+        <div class="post">
+          <div class="title">
+            <h1><a href="#">Hello World</a>
+          </div>
+          <div class="content">
+            <p></p>
+            <ul>
+              <li>...</li>
+            </ul>
+          </div>
+          <div class="author">
+            <a href="#" class="display"><img src="..." /></a>
+            <h4><a href="#">...</a></h4>
+            <p>
+              <a href="#">...</a>
+              <ul>
+                <li>...</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</code></pre>				
+				</section>
+
+
+				<section data-background-transition="slide" data-transition="linear">
+						<p>Hey! I'll totally use my cool nesting skillz!</p>
+
+<pre><code contenteditable>
+body {
+  div.container {
+    div.content {
+      div.articles {
+        & > div.post {
+          div.title {
+            h1 {
+              a {
+              }
+            }
+          }
+          div.content {
+            p { ... }
+            ul {
+              li { ... }
+            }
+          }
+          div.author {
+            a.display {
+              img { ... }
+            }
+            h4 {
+              a { ... }
+            }
+            p {
+              a { ... }
+            }
+            ul {
+              li { ... }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+</section>
+
+<!-- FIX -->
+				<section>
+					<p>oh......</p>
+
+<pre><code contenteditable>			
+body { ... }
+body div.content div.container { ... }
+body div.content div.container div.articles { ... }
+body div.content div.container div.articles > div.post { ... }
+body div.content div.container div.articles > div.post div.title { ... }
+body div.content div.container div.articles > div.post div.title h1 { ... }
+body div.content div.container div.articles > div.post div.title h1 a { ... }
+body div.content div.container div.articles > div.post div.content { ... }
+body div.content div.container div.articles > div.post div.content p { ... }
+body div.content div.container div.articles > div.post div.content ul { ... }
+body div.content div.container div.articles > div.post div.content ul li { ... }
+body div.content div.container div.articles > div.post div.author { ... }
+body div.content div.container div.articles > div.post div.author a.display { ... }
+body div.content div.container div.articles > div.post div.author a.display img { ... }
+body div.content div.container div.articles > div.post div.author h4 { ... }
+body div.content div.container div.articles > div.post div.author h4 a { ... }
+body div.content div.container div.articles > div.post div.author p { ... }
+body div.content div.container div.articles > div.post div.author p a { ... }
+body div.content div.container div.articles > div.post div.author ul { ... }
+body div.content div.container div.articles > div.post div.author ul li { ... }
+
+</code></pre>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>Several Reasons why this is <em class="sassy-pink">gross</em></h2>
+					<ul>
+						<li>Poor Rendering Performance</li>
+						<li>Unnecessary increase in file size</li>
+						<li>Maintainability</li>
+					</ul>
+					<br/>
+					<hr>
+					<br/>
+					<div class="clear">
+						<div class="parts-1">
+							<img src="lib/img/inception.png" alt="inception" style="max-width:100%;">
+						</div>
+						<div class="parts-3" style="padding-top:50px;">
+							<h3 class="sassy-pink">Inception Rule</h3>
+							<p>Don't go more than <b>four levels</b> deep.</p>
+						</div>
+					</div>
+
+				</section>
+
+				<section>
+				<div class="clear">
+					<h2>Change the way you think</h2>
+					<p>Try to improve your understanding of the required CSS through <b class="sassy-pink">contexts, objects and interaction states.</b></p>
+					<br/>
+					</div>
+					<div class="clear">
+						<div class="left-half">
+
+						<p class="align-left">Context:</p>
+						<p class="sassy-pink mini align-left">SCSS:</p>
+						<pre><code contenteditable>cart {
+	#sidebar { width: 150px; }
+	#content { width: 850px; }
+}</code></pre>
+						<br/>
+
+						</div>
+
+						<div class="right-half">
+						<br/>
+						<p class="sassy-pink mini align-left" style="padding-top:10px;">CSS:</p>
+					<pre><code contenteditable>
+cart #sidebar {width:150px;}
+cart #content {width:850px;}
+					</code></pre>
+					</div>
+				</div> <!-- .clear -->
+
+				<div class="clear">
+					<div class="left-half">
+					<p class="align-left">Objects:</p>
+					<pre><code contenteditable>#sideabr
+#content
+#footer
+.blog-post
+.comment
+.widget
+.logo
+.user
+.button</code></pre>
+					</div>
+					<div class="right-half">
+					<p class="align-left">Interaction:</p>
+<pre><code contenteditable>
+a {
+  font-weight: bold;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+  body.firefox & { font-weight: normal; }
+}
+</code></pre>
+					</div>
+				</div> <!-- .clear -->
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>keep it simple</h3>
+					<div class="clear">
+						<div class="left-half">
+						<p class="mini align-left sassy-pink">SCSS</p>
+						<pre><code contenteditable>
+.content {
+	border: 1px solid #ccc;
+	padding: 20px;
+  h2 {
+	  font-size: 3em;
+	  margin: 20px 0;
+  }
+  p {
+	  font-size: 1.5em;
+	  margin: 15px 0;
+  }
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+						<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.content {
+	border: 1px solid #ccc;
+	padding: 20px;
+}
+.content h2 {
+	font-size: 3em;
+	margin:20px 0;
+}
+.content p {
+	font-size: 1.5em;
+	margin:15px 0;
+}
+							</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>Nesting Properties</h3>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+.btn {
+	text: {
+		decoration: underline;
+		transform: lowercase;
+	}
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.btn {
+	text-decoration: underline;
+	text-transform: lowercase;
+}
+							</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>&amp; Symbol</h3>
+					<p>References the parent selector</p>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+.content {
+	padding: 20px;
+	.callout {
+		border-color: red;
+	}
+	&.callout {
+		border-color: green;
+	}
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.content {
+	padding:20px;
+}
+.content .callout {
+	border-color:red;
+}
+.content.callout {
+	border-color: green;d
+}
+							</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>There's more!</h3>
+					<p>So, what if I wanted to style all my <code>h3</code> headings a certain way, but for this one <code>h3</code>, that is also a child of a certain selector, I need it different</p>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+h3 {
+	font-size: 20px;
+	margin-right: 10px;
+	.some-parent-selector & {
+		font-size: 24px;
+		margin-bottom:20px;
+	}
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.some-parent-selector h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+							</code></pre>							
+						</div>
+					</div>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>Variables</h2>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+$base: #999999;
+
+.sidebar {
+	border: 1px solid $base;
+	p {
+		color: $base;
+	}
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.sidebar {
+	border: 1px solid #999999;
+}
+.sidebar p {
+	color: #999999;
+}
+							</code></pre>							
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>More Variables</h3>
+					<p class="mini align-left sassy-pink">SCSS</p>
+						<pre><code contenteditable>
+// Colors
+// -------------------------
+
+$emerald: #2ecc71;
+$carrot: #e67e22;
+$silver: #bdc3c7;
+
+// Typography
+// -------------------------
+
+$font-base: "Lato", Helvetica, Arial, sans-serif;
+$font-demo: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-monospace: Monaco, Menlo, Consolas, "Courier New", monospace;
+$font-size-base: 18px;
+
+$line-height-base:  		1.72222; // 31/18
+
+// Components
+// -------------------------
+
+$border-radius-base:             4px;
+$border-radius-large:            6px;
+$border-radius-small:            3px;
+
+// Forms
+// -------------------------
+
+$input-height-small:             35px;
+$input-height-base:              41px;
+$input-height-large:             45px;
+$input-height-huge:              53px;
+
+$input-border-radius: $border-radius-large;
+
+$rounded: false;
+$shadow: true;
+
+$authors: nick, dan, aimee, drew;
+
+$module-margin: 40px 0 20px 100px;
+
+
+						</code></pre>
+				<p class="mini"><span class="sassy-pink">*Keep scope in mind:</span> <br/>Variables are only available within the level of nested selectors where they’re defined</p>
+
+				</section>
+
+<!-- MIXINS -->
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>Mixins</h2>
+					<p>Don't Repeat Yourself: <b class="sassy-pink">Use Mixins</b></p>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.btn-a {
+	background: #777;
+	border: 1px solid #ccc;
+	font-size: 1em;
+	text-transform: uppercase;
+}
+.btn-b {
+	background: #ff0;
+	border: 1px solid #ccc;
+	font-size: 1em;
+	text-transform: uppercase;
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+@mixin button {
+	border: 1px solid #ccc;
+	font-size: 1em;
+	text-transform: uppercase;
+}
+
+.btn-a {
+	@include button;
+	background: #777;
+}
+.btn-b {
+	@include button;
+	background: #ff0;
+}
+							</code></pre>		
+
+						</div>
+					</div>
+					<p class="mini">*Make sure your @include mixin comes before the @include</p>
+				</section>
+
+				<section>
+					<h3>Adding Arguments to Mixins</h3>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+@mixin button($radius, $color: #000) {
+	border-radius: $radius;
+	color: $color;
+}
+
+.btn-a {
+	@include button($color: #777777, $radius: 5px);
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.btn-a {
+	border-radius: 5px;
+	color: #777777;
+}
+							</code></pre>		
+
+						</div>
+					</div>
+					<p class="mini">*Make sure your optional args come last</p>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>Interpolation in Mixins</h3>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+@mixin highlight($color, $side) {
+	border-#{side}-color: $color;
+}
+.btn-a {
+	@include highlight(#f00, right);
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.btn-a {
+	border-right-color: #ff0;
+}
+							</code></pre>		
+
+						</div>
+					</div>
+					<p class="mini">*Make sure your optional args come last</p>
+				</section>
+
+				<section>
+					<h3>@Extends</h3>
+							<pre><code contenteditable>
+<div class="error seriousError">
+  Dummy!
+</div>
+							</code></pre>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError {
+  border-width: 3px;
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+							</code></pre>		
+
+						</div>
+					</div>
+					<p class="mini">*Keep in mind if you are @extending a selector that has nested selectors, <a href="http://thephuse.com/development/common-sass-pitfalls-and-how-to-avoid-them/" target="_blank">things could get ugly!</a></p>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>Placeholder Selectors</h3>
+					<p>Always think: How can I make this more efficient?</p>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+%btn {
+	background: #777;
+	border: 1px solid #ccc;
+	font-size: 1em;
+	text-transform: uppercase;
+}
+.btn-a {
+	@extend %btn;
+}
+.btn-b {
+	@extend %btn;
+	background: #ff0;
+}
+.sidebar .btn-a {
+	text-transform: lowercase;
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.btn-a,
+.btn-b {
+	background: #777;
+	border: 1px solid #ccc;
+	font-size: 1em;
+	text-transform: uppercase;
+}
+.btn-b {
+	background: #ff0;
+}
+.sidebar .btn-a {
+	text-transform: lowercase;
+}
+							</code></pre>		
+
+						</div>
+					</div>
+				</section>
+
+<!-- Directives -->
+				<section>
+					<h3>Control Directives</h3>
+					<ul>
+						<li class="fragment">@if</li>
+						<li class="fragment">@for</li>
+						<li class="fragment">@each</li>
+						<li class="fragment">@while</li>
+					</ul>
+					<p class="fragment align-left">
+						<a href="http://thesassway.com/intermediate/if-for-each-while">Sass control directives</a> add a ton of power to scaling and reuse of your code.
+					</p>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>@each</h3>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+$authors: nick, aimee, dan, drew;
+$colors: green, blue, red, yellow;
+
+$author-style: zip($authors, $colors);
+
+@each $a in $author-style {
+	.author-#{nth($a,1)} {
+		background: nth($a, 2);
+	}
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.author-nick {
+	background: green;
+}
+.author-aimee {
+	background: blue;
+}
+.author-dan {
+	background: red;
+}
+.author-drew {
+	background: yellow;
+}
+							</code></pre>		
+
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<p style="color:#999;">...and finally</p>
+					<img src="lib/img/compass-logo.png" alt="compass logo">
+					<a href="http://compass-style.org/" target="_blank"><p>compass-style.org</p></a>
+							<pre><code contenteditable>
+	gem update --system
+	gem install compass
+
+	@import "compass";  // This goes at the top of your main.scss file
+							</code></pre>	
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>Compass Core Framework</h2>
+					<p class="sassy-pink">Imports</p>
+					<hr>
+					<ul class="fragment">
+						<li>CSS3</li>
+						<li>Typography</li>
+						<li>Utilities</li>
+					</ul>
+					<br/>
+					<p class="sassy-pink">Non Imported Modules</p>
+					<hr>
+					<ul class="fragment">
+						<li>Reset: <code>@import "compass/reset";</code></li>
+							<ul>
+								<li class="sassy-pink mini" style="margin-top:-20px;">! Don't use this if you plan to use normalize.css</li>
+							</ul>
+						<li>Layout</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>CSS3 Demo:</h2>
+					<p class="sassy-pink">Box-shadow</p>
+					<img src="lib/img/box-shadow.png" alt="box shadow demo" width="220px;">
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">HTML</p>
+							<pre><code contenteditable>
+<div class='box-shadow-example'>
+  <div id='box-shadow-default'></div>
+  <div id='box-shadow-custom'></div>
+  <div id='box-shadow-custom-multiple'></div>
+</div>
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+@import "compass/css3";
+ 
+.box-shadow-example div {
+  width: 40px;
+  height: 40px;
+  background: #eeeeee;
+  margin: 20px;
+  float: left; }
+ 
+// Default single box shadow
+#box-shadow-default {
+  @include single-box-shadow; }
+ 
+// Box shadow with custom settings
+#box-shadow-custom {
+  @include box-shadow(red 2px 2px 10px); }
+ 
+#box-shadow-custom-multiple {
+  @include box-shadow(rgba(blue, 0.4) 0 0 25px, rgba(green, 0.2) 0 0 3px 1px inset); }
+
+
+
+							</code></pre>		
+
+						</div>
+					</div>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<p><code class="sassy-pink">scale-lightness</code> shortcuts the sass <code class="sassy-pink">scale_color</code> use:</p>
+					<hr>
+					<br/>
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+.content {
+	color: scale_color(#eee, $lightness: 7%);
+}
+							</code></pre>
+							<p class="mini align-left sassy-pink">with Compass</p>
+							<pre><code contenteditable>
+@import "compass"; // top of main.scss
+
+.content {
+	color: scale-lightness(#eee, 7%); // or use a negative value to darken
+}
+							</code></pre>		
+					<p>There's also <a href="http://compass-style.org/reference/compass/helpers/colors/">shade, saturation, tint</a>...</p>
+				</section>
+
+				<section>
+					<h3>CSS Shapes</h3>
+					<p>Using <code class="sassy-pink">opposite-position</code></p>
+					<img src="lib/img/arrow-up.png" alt="caret-up" width="100px">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+@mixin caret($point) {
+	$opposite: opposite-position($point);
+	border: 100px solid transparent;
+	border-#{$opposite}: 100px solid #000;  // makes border-bottom
+	border-#{$point}: 0;  // makes border-top
+	height:0;
+	width:0;
+}
+
+.arrow-up {
+	@include caret(top);
+}
+.arrow-over {
+	@include caret(right);
+}
+							</code></pre>
+
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<img src="lib/img/function-bttns.png" alt="function buttons" width="200px">
+							<pre><code contenteditable>
+@function button-text($bg) {
+	@return contrast-color($bg, #333, #eee, 50%);
+}
+
+.btn-a {
+	background: #222;
+	color: button-text(#222); // outputs #eee
+}
+
+.btn-b {
+	background: #aaa;
+	color: button-text(#aaa) // outputs #333
+}
+							</code></pre>
+				</section>
+
+				<section>
+					<img src="lib/img/stretch.png" alt="stretch demo" width="200px;">
+							<pre><code contenteditable>
+@import "compass/layout";
+
+.content {
+	height:400px;
+	position: relative;
+	width: 400px;
+}
+
+.sidebar {
+	background: #be9947;
+	@include stretch(5px, auto, 5px, 5px);
+	width:100px;
+}
+							</code></pre>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>Structuring your projects</h2>
+							<pre><code contenteditable>
+stylesheets/
+|
+|-- modules/              # Common modules
+|   |-- _all.scss         # Include to get all modules
+|   |-- _utility.scss     # Module name
+|   |-- _colors.scss      # Etc...
+|   ...
+|
+|-- partials/             # Partials
+|   |-- _base.sass        # imports for all mixins + global project variables
+|   |-- _buttons.scss     # buttons
+|   |-- _figures.scss     # figures
+|   |-- _grids.scss       # grids
+|   |-- _typography.scss  # typography
+|   |-- _reset.scss       # reset
+|   ...
+|
+|-- vendor/               # CSS or Sass from other projects
+|   |-- _colorpicker.scss
+|   |-- _jquery.ui.core.scss
+|   ...
+|
+`-- main.scss            # primary Sass file
+							</code></pre>
+				</section>
+
+				<section>
+					<h2>images</h2>
+					<br/>
+					<p class="align-left sassy-pink mini">SCSS</p>
+							<pre><code contenteditable>
+@import "compass";
+
+.logo {
+	background: image-url('jeffrey.png');
+	height: image-height('jeffrey.png');
+	width: image-width('jeffrey.png');
+}
+							</code></pre>	
+					<p class="align-left sassy-pink mini">CSS</p>
+					<pre><code contenteditable>
+.logo {
+	background: url('/images/jeffrey.png');
+	height: 236px;
+	width: 236px;
+}
+					</code></pre>	
+					<p class="mini">* You can also use <code class="sassy-pink">inline-image('img.png')</code> to base64 embed images into CSS.</p>			
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>Grids</h2>
+					<ul>
+						<li style="list-style:none; margin-left:-30px;"><b>Horizontal</b></li>
+						<li class="fragment"><a target="_blank" href="http://susy.oddbird.net/">Susy (Responsive Grid for Compass)</a></li>
+						<li class="fragment"><a target="_blank" href="http://gumbyframework.com/">Gumby</a></li>
+						<li class="fragment"><a target="_blank" href="http://foundation.zurb.com">Foundation</a></li>
+					</ul>
+
+				</section>
+
+				<section>
+					<ul>
+						<li style="list-style:none; margin-left:-30px;"><b>Vertical</b></li>
+						<li><a href="http://compass-style.org/reference/compass/typography/vertical_rhythm/" target="_blank">Vertical Rhythm</a> with Compass</li>
+					</ul>
+					<img src="lib/img/vertical-rhythm.png" alt="vertical rhythm">
+				</section>
+
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>Resources</h2>
+					<ul>
+						<li><b>Website:</b> <a href="http://compass-style.org/" target="_blank">compass-style.org</a></li>
+						<li><b>Sass:</b> <a href="http://sass-lang.com" target="_blank">sass-lang.com</a></li>
+						<li><b>Community:</b> <a href="http://groups.google.com/group/compass-users/" target="_blank">groups.google.com/group/compass-users</a></li>
+						<li><b>The Sass Way:</b> <a href="http://thesassway.com/" target="_blank">thesassway.com</a></li>
+					</ul>
+					
+				</section>
+
+				<section>
+					<h1>Thanks!</h1>
+					<hr>
+					<ul>
+						<li><b>Corvisa:</b> <a href="http://corvisa.com">corvisa.com</a></li>
+						<li><b>Github:</b> <a href="https://github.com/likedaang/sass-compass">github.com/likedaang/sass-compass</a></li>
+						<li><b>Twitter:</b> <a href="https://twitter.com/likedaang" target="_blank">@likedaang</a></li>
+						<li><b>Made with:</b> <a href="https://github.com/hakimel/reveal.js/" target="_blank">reveal.js</a></li>
+					</ul>
+				</section>
+
+
+
+		</div> <!-- .reveal -->
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
