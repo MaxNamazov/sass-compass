@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Sass &amp; Compass Funtown</title>
+		<title>Sass &amp; Compass</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -55,6 +55,16 @@
 				</section>
 
 				<section>
+					<h2>CSS Preprocessors</h2>
+					<ul>
+						<li><a href="http://lesscss.org/" target="_blank">LESS</a></li>
+						<li><a href="http://learnboost.github.io/stylus/" target="_blank">Stylus</a></li>
+						<li><a href="http://sass-lang.com/" target="_blank">SASS</a></li>
+					</ul>
+				</section>
+
+
+				<section>
 					<section>
 						<h2>What is Sass?</h2>
 						<ul>
@@ -79,7 +89,7 @@
 				<section>
 
 					<h2>Types of syntax:</h2>
-						<h3 style="color:#c6538c">.scss</h4>
+						<h3 style="color:#c6538c">.scss</h3>
 						<hr>
 							<ul>
 								<li class="fragment">Sassy CSS</li>
@@ -89,7 +99,7 @@
 				</section>
 
 				<section>
-					<h3 style="color:#c6538c;">.sass</h4>
+					<h3 style="color:#c6538c;">.sass</h3>
 					<hr>
 					<ul>
 						<li class="fragment">Indented syntax</li>
@@ -323,6 +333,10 @@ nav {
     text-decoration: none;
   }
 }
+
+article {
+  header, section { margin-bottom: .5em; }
+}
 </code></pre>
 					</div>
 					<div class="right-half">
@@ -342,6 +356,10 @@ nav a {
   display: block;
   padding: 6px 12px;
   text-decoration: none;
+}
+
+article header, article section {
+  margin-bottom: .5em;
 }
 </code></pre>
 					</div>
@@ -1108,61 +1126,6 @@ width: 960px;
 							</code></pre>
 				</section>
 
-				<section data-background-transition="slide" data-transition="linear">
-				<p class="sassy-pink">Method 2:</p>
-							<pre><code contenteditable>
-@mixin bp($point) {
-  @if $point == papa-bear {
-    @media (max-width: 1600px) { @content; }
-  }
-  @else if $point == mama-bear {
-    @media (max-width: 1250px) { @content; }
-  }
-  @else if $point == baby-bear {
-    @media (max-width: 600px)  { @content; }
-  }
-}
-
-@include bp(baby-bear) {
-  #sidebar {
-    width:100%;
-  }
-}
-
-@include bp(medium) {
-  #sidebar {
-    width:50%;
-  }
-
-  #content {width: 70%;}
-}
-							</code></pre>
-
-				</section>
-
-				<section data-background-transition="slide" data-transition="linear">
-					<p>Compiles out:</p>
-							<pre><code contenteditable>
-@media (max-width: 480px) {
-  #sidebar {
-    width: 100%;
-  }
-}
-
-@media (min-width: 800px) and (max-width: 1000px) {
-  #sidebar {
-    width: 50%;
-   }
-
-  #content {
-    width: 70%;
-  }
-}
-
-
-							</code></pre>
-				</section>
-
 				<section>
 					<p>Mind sufficiently melted? Check out more:</p>
 					<ul>
@@ -1179,19 +1142,42 @@ width: 960px;
 							<p class="mini align-left sassy-pink">SCSS</p>
 							<pre><code contenteditable>
 @mixin highlight($color, $side) {
-	border-#{side}-color: $color;
+  border-#{side}-color: $color;
 }
 .btn-a {
-	@include highlight(#f00, right);
+  @include highlight(#f00, right);
 }
+/**********************************/
+@mixin grid-maker($columns-count) {
+  @for $i from 1 through $columns-count {
+    .col-#{$i}-#{$columns-count} {
+      width: 100% / $columns-count * $i;
+    }
+  }
+}
+
 							</code></pre>
 						</div>
 						<div class="right-half">
 							<p class="mini align-left sassy-pink">CSS</p>
 							<pre><code contenteditable>
 .btn-a {
-	border-right-color: #ff0;
+  border-right-color: #ff0;
 }
+/************/
+.col-1-16 {
+  width: 6.25%;
+}
+.col-2-16 {
+  width: 12.5%;
+}
+.col-3-16 {
+  width: 18.75%;
+}
+.col-4-16 {
+  width: 25%;
+}
+/* ... */
 							</code></pre>
 
 						</div>
@@ -1216,6 +1202,8 @@ width: 960px;
   background-color: #fdd;
 }
 .seriousError {
+  border: 1px #f00;
+  background-color: #fdd;
   border-width: 3px;
 }
 							</code></pre>
@@ -1334,6 +1322,90 @@ $author-style: zip($authors, $colors);
 .author-drew {
 	background: yellow;
 }
+							</code></pre>
+
+						</div>
+					</div>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>@if</h3>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+p {
+  @if 1 + 1 == 2 { border: 1px solid;  }
+  @if 5 < 3      { border: 2px dotted; }
+  @if null       { border: 3px double; }
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+p {
+  border: 1px solid;
+}
+							</code></pre>
+
+						</div>
+					</div>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>@while</h3>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+$i: 6;
+@while $i > 0 {
+  .item-#{$i} { width: 2em * $i; }
+  $i: $i - 2;
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.item-6 {
+  width: 12em; }
+
+.item-4 {
+  width: 8em; }
+
+.item-2 {
+  width: 4em; }
+							</code></pre>
+
+						</div>
+					</div>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h3>@for</h3>
+					<br/>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+@for $i from 1 through 3 {
+  .item-#{$i} { width: 2em * $i; }
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.item-1 {
+  width: 2em; }
+.item-2 {
+  width: 4em; }
+.item-3 {
+  width: 6em; }
 							</code></pre>
 
 						</div>
