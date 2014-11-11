@@ -40,25 +40,18 @@
 					<h1 style="text-transform:none;">Sass</h1>
 					<hr style="border-color:#eaeaea;">
 					<h3>Syntactically Awesome Style Sheets</h3>
-					<hr style="border-color:#eaeaea;">
-					<p>
-						<small>Follow this presentation <a href="http://erinwilbur.com/sass-compass">erinwilbur.com/sass-compass</a></small>
-					</p>
-					<p>
-						<small>Githubs: <a href="https://github.com/likedaang/sass-compass">github.com/likedaang/sass-compass</a></small>
-					</p>
 				</section>
 
 				<section data-background-transition="slide" data-transition="linear">
-					<h2>New Logo!</h2>
-					<div class="left-half">
-						<p>Old</p>
-						<img src="lib/img/sass.jpg" alt="old sass logo" width="300px">
-					</div>
-					<div class="right-half">
-						<p>New</p>
-						<img src="lib/img/sass-logo-new.png" alt="new sass logo" width="300px">
-					</div>
+					<h2>Starting a basic website in 2014: </h2>
+					<ul style="list-style: none;">
+						<li class="fragment">1. Install Node</li>
+						<li class="fragment">2. Install Bower</li>
+						<li class="fragment">3. Pick CSS framework</li>
+						<li class="fragment">4. Pick responsive approach</li>
+						<li class="fragment">...</li>
+						<li class="fragment">47. Write some HTML</li>
+					</ul>
 				</section>
 
 				<section>
@@ -92,7 +85,7 @@
 								<li class="fragment">Sassy CSS</li>
 								<li class="fragment">more widely used</li>
 								<li class="fragment">An extension of the syntax of CSS3</li>
-							</ul> 
+							</ul>
 				</section>
 
 				<section>
@@ -200,7 +193,7 @@
 						sudo gem install sass
 						```
 						(windows : may need to install Ruby first)
-						
+
 					</script>
 				</section>
 
@@ -216,7 +209,7 @@
 					<p>You can also tell Sass to watch the file and update the CSS every time the Sass file changes:</p>
 					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 						sass --watch input.scss:output.css
-					</code></pre>					
+					</code></pre>
 					</br>
 					<p>If you have a directory with many Sass files, you can also tell Sass to watch the entire directory:</p>
 					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
@@ -234,7 +227,7 @@
 						<li class="fragment">Compass is an open-source Sass Framework consisting of a collection of helpful tools and Sass library that produces battle-tested cross-browser CSS</li>
 						<li class="fragment">It was created by <a href="https://github.com/chriseppstein/compass" target="_blank">Chris Epstein</a></li>
 					</ul>
-					
+
 				</section>
 
 				<section data-state="customevent">
@@ -257,16 +250,16 @@
 					</code></pre>
 				<p>creates:</p>
 					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-						directory sass-demo/ 
-						directory sass-demo/sass/ 
-						directory sass-demo/stylesheets/ 
-						create sass-demo/config.rb 
-						create sass-demo/sass/screen.scss 
-						create sass-demo/sass/print.scss 
-						create sass-demo/sass/ie.scss 
-						create sass-demo/stylesheets/ie.css 
-						create sass-demo/stylesheets/print.css 
-						create sass-demo/stylesheets/screen.css 
+						directory sass-demo/
+						directory sass-demo/sass/
+						directory sass-demo/stylesheets/
+						create sass-demo/config.rb
+						create sass-demo/sass/screen.scss
+						create sass-demo/sass/print.scss
+						create sass-demo/sass/ie.scss
+						create sass-demo/stylesheets/ie.css
+						create sass-demo/stylesheets/print.css
+						create sass-demo/stylesheets/screen.css
 					</code></pre>
 				</section>
 
@@ -307,7 +300,7 @@
 
 				<section>
 					<div class="clear">
-					<h3>Ready to write some Sass</h3>					
+					<h3>Ready to write some Sass</h3>
 					<p class="sassy-pink"><b>Nesting</b></p>
 					<br/>
 					</div>
@@ -400,7 +393,7 @@ nav a {
     </div>
   </div>
 </body>
-</code></pre>				
+</code></pre>
 				</section>
 
 
@@ -451,7 +444,7 @@ body {
 				<section>
 					<p>oh......</p>
 
-<pre><code contenteditable>			
+<pre><code contenteditable>
 body { ... }
 body div.content div.container { ... }
 body div.content div.container div.articles { ... }
@@ -685,7 +678,57 @@ h3 {
   font-size: 24px;
   margin-bottom: 20px;
 }
-							</code></pre>							
+							</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>Going BEM</h3>
+
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">SCSS</p>
+							<pre><code contenteditable>
+.note {
+  color: #ffffff;
+
+  &__content {
+    background: white;
+  }
+
+  &__meta {
+    background: #f1f1f1;
+    border-top: 1px solid #eee;
+  }
+
+  &--featured {
+    box-shadow: 0 3px 1px rgba(0, 0, 0, 0.1);
+  }
+
+}
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">CSS</p>
+							<pre><code contenteditable>
+.note {
+  color: #ffffff;
+}
+
+.note__content {
+  background: white;
+}
+
+.note__meta {
+  background: #f1f1f1;
+  border-top: 1px solid #eee;
+}
+
+.note--featured {
+  box-shadow: 0 3px 1px rgba(0, 0, 0, 0.1);
+}
+							</code></pre>
 						</div>
 					</div>
 				</section>
@@ -715,7 +758,7 @@ $base: #999999;
 .sidebar p {
 	color: #999999;
 }
-							</code></pre>							
+							</code></pre>
 						</div>
 					</div>
 				</section>
@@ -771,6 +814,66 @@ $module-margin: 40px 0 20px 100px;
 
 				</section>
 
+				<section>
+					<h3>Some math</h3>
+					<p class="mini align-left sassy-pink">SCSS</p>
+					<pre><code contenteditable>
+1em + 1em;  // 2em
+1em - 1em;  // 0em
+1in + 72pt; // 2in
+6px * 4;    // 24px
+18 % 5;     // 3
+
+/******************/
+
+$container: 960px
+$main: 680px;
+$gutter: 30px;
+
+#sidebar {
+  width: $container - $main - $gutter; // 250px;
+}
+
+						</code></pre>
+
+				</section>
+
+				<section>
+					<h3>Number functions</h3>
+					<p class="mini align-left sassy-pink">SCSS</p>
+					<pre contenteditable><code>
+percentage(13/25) // 52%
+round(2.4)        // 2
+ceil(2.2)         // 3
+floor(2.6)        // 2
+abs(-24)          // 24
+						</code></pre>
+				</section>
+
+				<section data-background-transition="slide" data-transition="linear">
+					<h2>Custom functions</h2>
+					<div class="clear">
+						<div class="left-half">
+							<p class="mini align-left sassy-pink">Scss</p>
+							<pre><code contenteditable>
+@function pxem($px, $context: 16px) {
+  @return ($px / $context) * 1em;
+}
+
+article h2 { font-size: pxem(45px); }
+							</code></pre>
+						</div>
+						<div class="right-half">
+							<p class="mini align-left sassy-pink">css</p>
+							<pre><code contenteditable>
+article h2 { font-size: 2.813em; }
+							</code></pre>
+
+						</div>
+					</div>
+
+				</section>
+
 <!-- MIXINS -->
 				<section data-background-transition="slide" data-transition="linear">
 					<h2>Mixins</h2>
@@ -811,7 +914,7 @@ $module-margin: 40px 0 20px 100px;
 	@include button;
 	background: #ff0;
 }
-							</code></pre>		
+							</code></pre>
 
 						</div>
 					</div>
@@ -848,7 +951,7 @@ h1 {
   @include header-text;
 }
 
-@mixin highlighted-background { 
+@mixin highlighted-background {
 	background-color: #fc0;
 	padding: 0.5em;
 }
@@ -868,7 +971,7 @@ h1 {
 						<aside class="notes">
 							Remember mixin recursion is forbidden: you may not include mixins within itself directly or indirectly
 						</aside>
-					
+
 				</section>
 
 
@@ -903,7 +1006,7 @@ h1 {
   border-color: blue;
   border-width: 2in;
   border-style: dashed; }
-							</code></pre>		
+							</code></pre>
 
 						</div>
 					</div>
@@ -952,7 +1055,7 @@ h1 {
     @media only screen and (min-width: 768px) and (max-width: 959px) { @content; }
   }
 }
- 
+
 #sidebar {
   float: left;
   width: 300px;
@@ -969,11 +1072,11 @@ h1 {
 							<pre><code contenteditable>
 #sidebar {
   float: left;
-  width: 300px; 
+  width: 300px;
 }
 @media only screen and (max-width: 479px) {
 #sidebar {
-  float: none; } 
+  float: none; }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 #sidebar {
@@ -981,25 +1084,25 @@ h1 {
 }
 @media only screen and (min-width: 768px) and (max-width: 959px) {
 #sidebar {
-  width: 240px; } 
+  width: 240px; }
 }
 
   // and for every instance inside a selector
 
 #content {
-width: 960px; 
+width: 960px;
 }
 @media only screen and (max-width: 479px) {
   #content {
-    width: 200px; } 
+    width: 200px; }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   #content {
-    width: 300px; } 
+    width: 300px; }
 }
 @media only screen and (min-width: 768px) and (max-width: 959px) {
   #content {
-    width: 600px; } 
+    width: 600px; }
 }
 
 							</code></pre>
@@ -1042,23 +1145,23 @@ width: 960px;
 							<pre><code contenteditable>
 @media (max-width: 480px) {
   #sidebar {
-    width: 100%; 
-  } 
+    width: 100%;
+  }
 }
 
 @media (min-width: 800px) and (max-width: 1000px) {
   #sidebar {
-    width: 50%; 
+    width: 50%;
    }
 
   #content {
-    width: 70%; 
-  } 
+    width: 70%;
+  }
 }
 
 
 							</code></pre>
-				</section>			
+				</section>
 
 				<section>
 					<p>Mind sufficiently melted? Check out more:</p>
@@ -1089,7 +1192,7 @@ width: 960px;
 .btn-a {
 	border-right-color: #ff0;
 }
-							</code></pre>		
+							</code></pre>
 
 						</div>
 					</div>
@@ -1128,7 +1231,7 @@ width: 960px;
   @extend .error;
   border-width: 3px;
 }
-							</code></pre>		
+							</code></pre>
 
 						</div>
 					</div>
@@ -1177,7 +1280,7 @@ width: 960px;
 .sidebar .btn-a {
 	text-transform: lowercase;
 }
-							</code></pre>		
+							</code></pre>
 
 						</div>
 					</div>
@@ -1231,7 +1334,7 @@ $author-style: zip($authors, $colors);
 .author-drew {
 	background: yellow;
 }
-							</code></pre>		
+							</code></pre>
 
 						</div>
 					</div>
@@ -1246,7 +1349,7 @@ $author-style: zip($authors, $colors);
 	gem install compass
 
 	@import "compass";  // This goes at the top of your main.scss file
-							</code></pre>	
+							</code></pre>
 				</section>
 
 				<section data-background-transition="slide" data-transition="linear">
@@ -1289,28 +1392,28 @@ $author-style: zip($authors, $colors);
 							<p class="mini align-left sassy-pink">SCSS</p>
 							<pre><code contenteditable>
 @import "compass/css3";
- 
+
 .box-shadow-example div {
   width: 40px;
   height: 40px;
   background: #eeeeee;
   margin: 20px;
   float: left; }
- 
+
 // Default single box shadow
 #box-shadow-default {
   @include single-box-shadow; }
- 
+
 // Box shadow with custom settings
 #box-shadow-custom {
   @include box-shadow(red 2px 2px 10px); }
- 
+
 #box-shadow-custom-multiple {
   @include box-shadow(rgba(blue, 0.4) 0 0 25px, rgba(green, 0.2) 0 0 3px 1px inset); }
 
 
 
-							</code></pre>		
+							</code></pre>
 
 						</div>
 					</div>
@@ -1333,7 +1436,7 @@ $author-style: zip($authors, $colors);
 .content {
 	color: scale-lightness(#eee, 7%); // or use a negative value to darken
 }
-							</code></pre>		
+							</code></pre>
 					<p>There's also <a href="http://compass-style.org/reference/compass/helpers/colors/">shade, saturation, tint</a>...</p>
 				</section>
 
@@ -1441,7 +1544,7 @@ stylesheets/
 	height: image-height('jeffrey.png');
 	width: image-width('jeffrey.png');
 }
-							</code></pre>	
+							</code></pre>
 					<p class="align-left sassy-pink mini">CSS</p>
 					<pre><code contenteditable>
 .logo {
@@ -1449,8 +1552,8 @@ stylesheets/
 	height: 236px;
 	width: 236px;
 }
-					</code></pre>	
-					<p class="mini">* You can also use <code class="sassy-pink">inline-image('img.png')</code> to base64 embed images into CSS.</p>			
+					</code></pre>
+					<p class="mini">* You can also use <code class="sassy-pink">inline-image('img.png')</code> to base64 embed images into CSS.</p>
 				</section>
 
 				<section data-background-transition="slide" data-transition="linear">
@@ -1471,12 +1574,6 @@ stylesheets/
 					</ul>
 					<img src="lib/img/vertical-rhythm.png" alt="vertical rhythm">
 				</section>
-
-				<section>
-					<img src="lib/img/grumpy-cat-non.jpg" alt="grumpy cat non" width="400px">
-					<p>But I am a designer! This is all very complicate</p>
-				</section>
-
 				<section>
 					<h2>It will make your life easier</h2>
 					<p class="sassy-pink"><b>Fully grasp organizing your CSS first:</b></p>
@@ -1517,16 +1614,13 @@ stylesheets/
 						<li><b>Community:</b> <a href="http://groups.google.com/group/compass-users/" target="_blank">groups.google.com/group/compass-users</a></li>
 						<li><b>The Sass Way:</b> <a href="http://thesassway.com/" target="_blank">thesassway.com</a></li>
 					</ul>
-					
+
 				</section>
 
 				<section>
 					<h1>Thanks!</h1>
 					<hr>
 					<ul>
-						<li><b>Corvisa:</b> <a href="http://corvisa.com">corvisa.com</a></li>
-						<li><b>Github:</b> <a href="https://github.com/likedaang/sass-compass">github.com/likedaang/sass-compass</a></li>
-						<li><b>Twitter:</b> <a href="https://twitter.com/likedaang" target="_blank">@likedaang</a></li>
 						<li><b>Made with:</b> <a href="https://github.com/hakimel/reveal.js/" target="_blank">reveal.js</a></li>
 					</ul>
 				</section>
